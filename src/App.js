@@ -1,6 +1,16 @@
 import React from "react";
 import "./App.css";
 import "./tachyons.min.css";
+import CourseProgress from "./CourseProgress";
+
+const courses = [
+  {
+    id: 1,
+    title: "Conducting Usability Testing",
+    points_gained: 61,
+    points_total: 153
+  }
+];
 
 class App extends React.Component {
   render() {
@@ -47,6 +57,7 @@ class App extends React.Component {
                   <span className="ml3">70/100</span>
                 </td>
               </tr>
+              <CourseProgress course={courses[0]} />
             </tbody>
           </table>
         </main>

@@ -3,17 +3,26 @@ import "./App.css";
 import "./tachyons.min.css";
 import CourseProgress from "./CourseProgress";
 
-const courses = [
-  {
-    id: 1,
-    title: "Conducting Usability Testing",
-    points_gained: 61,
-    points_total: 153
-  }
-];
+const COURSE_URL = "http://localhost:1960/courses";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+  }
+
+  componentDidMount() {
+    fetch(COURSE_URL)
+      .then(response => response.json())
+      .then(data => this.setState({ data }));
+  }
+
   render() {
+    const courseItems = this.state.data.map(x => (
+      <CourseProgress key={x.id} course={x} />
+    ));
     return (
       <div className="App">
         <main className="w-50 center mt5">
@@ -34,31 +43,7 @@ class App extends React.Component {
                 <th>Progress</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <h1 className="f6 f5-ns fw6 lh-title black mv0">
-                    Dynamic User Experience: Design and Usability
-                  </h1>
-                </td>
-                <td>
-                  <progress className="white" max="100" value="80"></progress>
-                  <span className="ml3">70/100</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h1 className="f6 f5-ns fw6 lh-title black mv0">
-                    Dynamic User Experience: Design and Usability
-                  </h1>
-                </td>
-                <td>
-                  <progress className="white" max="100" value="80"></progress>
-                  <span className="ml3">70/100</span>
-                </td>
-              </tr>
-              <CourseProgress course={courses[0]} />
-            </tbody>
+            <tbody>{courseItems}</tbody>
           </table>
         </main>
       </div>

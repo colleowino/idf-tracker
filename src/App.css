@@ -1,0 +1,61 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #fcfbfe;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: transparent;
+  border-radius: 2px;
+  border: 1px solid rgb(8, 184, 116);
+  border-radius: 50px;
+  box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
+}
+
+progress::-webkit-progress-value {
+  border-radius: 50px;
+  height: 110%;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+  background: #0acf83;
+}
+
+progress {
+  background-color: transparent;
+  border-radius: 100%;
+  width: 70%;
+}
+
+table.blueTable {
+  border: 1px solid #ebecf2;
+  background-color: #fcfbfe;
+  width: 100%;
+  table-layout: fixed;
+  text-align: left;
+  border-collapse: collapse;
+  /* height: 800px; */
+}
+table.blueTable td,
+table.blueTable th {
+  border: 1px solid #ebecf2;
+  padding: 10px 10px;
+}
+table.blueTable tbody td {
+  font-size: 13px;
+  font-weight: bold;
+  color: #100b33;
+}
+table.blueTable thead {
+  background: #ffffff;
+  text-transform: uppercase;
+}
+table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #a09fa2;
+}
+
+table.blueTable thead th.til {
+  width: 60%;
+}

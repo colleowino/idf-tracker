@@ -35,6 +35,18 @@ class FormModal extends React.Component {
       });
   }
 
+  deleteCourse() {
+    axios
+      .delete(`${COURSE_URL}/${this.props.course.id}`)
+      .then(resp => {
+        this.props.refresh(resp.data);
+        this.hideCourseDialog();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     const { formAction } = this.props;
@@ -45,7 +57,11 @@ class FormModal extends React.Component {
     }
 
     if (formAction === formActions.EDIT) {
-      this.updateCourse(data);
+      this.updateCourse();
+    }
+
+    if (formAction === formActions.DELETE) {
+      this.deleteCourse();
     }
 
     this.hideCourseDialog();
@@ -106,11 +122,20 @@ class FormModal extends React.Component {
               </div>
             </fieldset>
             <div className="mt3">
-              <input
-                className="b ph3 white pv2 input-reset ba b--black bg-green grow pointer f6"
-                type="submit"
-                value="Save"
-              />
+              {this.props.formAction === formActions.DELETE ? (
+                <input
+                  className="b ph3 white pv2 input-reset ba b--black bg-red grow pointer f6"
+                  type="submit"
+                  value="Delete"
+                />
+              ) : (
+                <input
+                  className="b ph3 white pv2 input-reset ba b--black bg-green grow pointer f6"
+                  type="submit"
+                  value="Save"
+                />
+              )}
+
               <a
                 className="f6 b ml3  link dim br1 ph3 pv2 mb2 dib white bg-silver"
                 href="#0"

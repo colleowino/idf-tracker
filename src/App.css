@@ -6,6 +6,15 @@ body {
   background-color: #fcfbfe;
 }
 
+.add-form {
+  left: calc(100vw /2  - 10vw);
+  top: 5vh;
+}
+
+.overlay{
+  margin-top: -4em;
+}
+
 progress[value]::-webkit-progress-bar {
   background-color: transparent;
   border-radius: 2px;

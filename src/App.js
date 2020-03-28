@@ -29,6 +29,7 @@ class App extends React.Component {
 
   hideCourseDialog() {
     const overlay = document.getElementById("overlay");
+    document.getElementById("courseForm").reset();
     overlay.classList.add("dn");
   }
 
@@ -36,12 +37,13 @@ class App extends React.Component {
     event.preventDefault();
     const data = serialize(event.target, { hash: true });
 
-    console.log(data);
-
     axios
       .post(COURSE_URL, data)
       .then(resp => {
-        console.log(resp.data);
+        const newData = this.state.data;
+        newData.push(resp.data);
+        this.setState({ data: newData });
+        this.hideCourseDialog();
       })
       .catch(error => {
         console.log(error);
@@ -62,6 +64,7 @@ class App extends React.Component {
         >
           <article className="absolute ba add-form bg-white relative center pa4 black-80">
             <form
+              id="courseForm"
               action="sign-up_submit"
               method="post"
               onSubmit={this.handleSubmit}

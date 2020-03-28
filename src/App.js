@@ -10,28 +10,30 @@ class App extends React.Component {
     super(props);
     this.state = {
       data: [],
+      refreshKey: Math.random(),
       action: formActions.CREATE,
       currentCourse: {}
     };
   }
 
-  componentDidMount() {
-    console.log(COURSE_URL)
+  refreshCourseList = () => {
     fetch(COURSE_URL)
       .then(response => response.json())
       .then(data => this.setState({ data }));
+  };
+
+  componentDidMount() {
+    this.refreshCourseList();
+  }
+
+  resetToAddCourses = () => {
+    this.setState({ currentCourse: {}});
+    this.showCourseDialog();
   }
 
   showCourseDialog() {
     const overlay = document.getElementById("overlay");
     overlay.classList.remove("dn");
-  }
-
-  // update without making another api call
-  refreshCourseList = (newCourse) => {
-    const newData = this.state.data;
-    newData.push(newCourse);
-    this.setState({ data: newData });
   }
 
   updateDeleteCourse = (action, course) => {
@@ -50,14 +52,18 @@ class App extends React.Component {
     ));
     return (
       <div className="relative App">
-        <FromModal refresh={this.refreshCourseList} formAction={this.state.action} course={this.state.currentCourse} />
+        <FromModal
+          refresh={this.refreshCourseList}
+          formAction={this.state.action}
+          course={this.state.currentCourse}
+        />
         <main className="w-70 center mt5">
           <h1 className="f6 fw6 ttu tracked mb4">
             Interaction Design Foundation Courses
             <button
               className="b--black-10 ba bg-blue fr pointer pv1 white"
               type="submit"
-              onClick={this.showCourseDialog}
+              onClick={this.resetToAddCourses}
             >
               + Course
             </button>

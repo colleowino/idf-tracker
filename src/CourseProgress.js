@@ -10,7 +10,7 @@ class CourseProgress extends React.Component {
   
   editCourse = (event) => {
     event.preventDefault();
-    this.props.courseHandler(formActions, this.props.course);
+    this.props.courseHandler(formActions.EDIT, this.props.course);
   }
 
   render = () => {

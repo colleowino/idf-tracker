@@ -25,7 +25,7 @@ class FormModal extends React.Component {
 
   updateCourse(data) {
     axios
-      .patch(`${COURSE_URL}/${data.id}`, data)
+      .patch(`${COURSE_URL}/${this.props.course.id}`, data)
       .then(resp => {
         this.props.refresh(resp.data);
         this.hideCourseDialog();

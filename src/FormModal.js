@@ -1,7 +1,7 @@
 import React from "react";
 import serialize from "form-serialize";
 import axios from "axios";
-import { COURSE_URL } from "./constants";
+import { COURSE_URL, formActions } from "./constants";
 
 class FormModal extends React.Component {
   hideCourseDialog() {
@@ -10,12 +10,22 @@ class FormModal extends React.Component {
     overlay.classList.add("dn");
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const data = serialize(event.target, { hash: true });
-
+  addCourse(data) {
     axios
       .post(COURSE_URL, data)
+      .then(resp => {
+        console.log(resp);
+        this.props.refresh(resp.data);
+        this.hideCourseDialog();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  updateCourse(data) {
+    axios
+      .patch(`${COURSE_URL}/${data.id}`, data)
       .then(resp => {
         this.props.refresh(resp.data);
         this.hideCourseDialog();
@@ -23,13 +33,25 @@ class FormModal extends React.Component {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const { formAction } = this.props;
+    const data = serialize(event.target, { hash: true });
+
+    if (formAction === formActions.CREATE) {
+      this.addCourse(data);
+    }
+
+    if (formAction === formActions.EDIT) {
+      this.updateCourse(data);
+    }
 
     this.hideCourseDialog();
   };
 
   render() {
-    console.log(this.props);
-    // const { title, points_gained, points_total } = this.props.course;
     const { title, points_gained, points_total } = this.props.course || {};
     return (
       <div
@@ -39,7 +61,6 @@ class FormModal extends React.Component {
         <article className="absolute ba add-form bg-white relative center pa4 black-80">
           <form
             id="courseForm"
-            action="sign-up_submit"
             method="post"
             onSubmit={this.handleSubmit}
             acceptCharset="utf-8"

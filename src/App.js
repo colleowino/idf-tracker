@@ -3,14 +3,14 @@ import "./App.css";
 import "./tachyons.min.css";
 import CourseProgress from "./CourseProgress";
 import FromModal from "./FormModal";
-import { COURSE_URL } from "./constants";
+import { COURSE_URL, formActions } from "./constants";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      showForm: false,
+      action: formActions.CREATE,
       currentCourse: {}
     };
   }
@@ -35,7 +35,7 @@ class App extends React.Component {
   }
 
   updateDeleteCourse = (action, course) => {
-    this.setState({ currentCourse: course });
+    this.setState({ action, currentCourse: course });
     this.showCourseDialog();
   };
 
@@ -50,7 +50,7 @@ class App extends React.Component {
     ));
     return (
       <div className="relative App">
-        <FromModal refresh={this.refreshCourseList} course={this.state.currentCourse} />
+        <FromModal refresh={this.refreshCourseList} formAction={this.state.action} course={this.state.currentCourse} />
         <main className="w-70 center mt5">
           <h1 className="f6 fw6 ttu tracked mb4">
             Interaction Design Foundation Courses

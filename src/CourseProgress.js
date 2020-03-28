@@ -1,15 +1,16 @@
 import React from "react";
+import { formActions } from "./constants";
 
 class CourseProgress extends React.Component {
 
   deleteCourse = (event) => {
     event.preventDefault();
-    this.props.courseHandler('DELETE', this.props.course);
+    this.props.courseHandler(formActions.DELETE, this.props.course);
   }
   
   editCourse = (event) => {
     event.preventDefault();
-    this.props.courseHandler('EDIT', this.props.course);
+    this.props.courseHandler(formActions, this.props.course);
   }
 
   render = () => {

@@ -53,8 +53,8 @@ class App extends React.Component {
   };
 
   render() {
-    const courseItems = this.state.data.map(x => (
-      <CourseProgress key={x.id} course={x} />
+    const courseItems = this.state.data.map((x, indx) => (
+      <CourseProgress index={indx+1} key={x.id} course={x} />
     ));
     return (
       <div className="relative App">
@@ -97,7 +97,7 @@ class App extends React.Component {
                 </div>
                 <div className="mt3 w-50 fr">
                   <label className="db fw4 lh-copy f6" htmlFor="points_total">
-                    Maximum points -ll
+                    Maximum points
                   </label>
                   <input
                     className="w-100 pa2 input-reset ba bg-transparent"
@@ -140,6 +140,7 @@ class App extends React.Component {
           <table className="blueTable">
             <thead>
               <tr>
+                <th className="nums">#</th>
                 <th className="til">course</th>
                 <th>Progress</th>
               </tr>

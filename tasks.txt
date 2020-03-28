@@ -1,0 +1,13 @@
+todo:
+- numberings
+- delete button
+- edit reusing the form
+- sorting by progress
+
+Create react app:
+- Define component structure
+- parent fetches:
+  - form to add will also populate when edit
+
+# design:
+- Built with tachyons and custom css

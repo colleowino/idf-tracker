@@ -68,3 +68,7 @@ table.blueTable thead th {
 table.blueTable thead th.til {
   width: 60%;
 }
+
+table.blueTable thead th.nums {
+  width: 5%;
+}

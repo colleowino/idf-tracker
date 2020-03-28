@@ -19,6 +19,22 @@ class CourseProgress extends React.Component {
             {points_gained}/{points_total}
           </span>
         </td>
+        <td>
+          <button
+            className="b--black-10 ba bg-green pointer pv1 white"
+            type="submit"
+            // onClick={this.showCourseDialog}
+          >
+            Edit
+          </button>
+          <button
+            className="b--black-10 ba bg-red ml3 pointer pv1 white"
+            type="submit"
+            // onClick={this.showCourseDialog}
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     );
   }

@@ -115,7 +115,7 @@ class App extends React.Component {
                   value="Save"
                 />
                 <a
-                  className="f6 b ml3 ba b--black  link dim br1 ph3 pv2 mb2 dib white bg-dark-pink"
+                  className="f6 b ml3  link dim br1 ph3 pv2 mb2 dib white bg-silver"
                   href="#0"
                   onClick={this.hideCourseDialog}
                 >
@@ -125,7 +125,7 @@ class App extends React.Component {
             </form>
           </article>
         </div>
-        <main className="w-50 center mt5">
+        <main className="w-70 center mt5">
           <h1 className="f6 fw6 ttu tracked mb4">
             Interaction Design Foundation Courses
             <button
@@ -143,6 +143,7 @@ class App extends React.Component {
                 <th className="nums">#</th>
                 <th className="til">course</th>
                 <th>Progress</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>{courseItems}</tbody>

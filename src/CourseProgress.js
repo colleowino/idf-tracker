@@ -1,7 +1,18 @@
 import React from "react";
 
 class CourseProgress extends React.Component {
-  render() {
+
+  deleteCourse = (event) => {
+    event.preventDefault();
+    this.props.courseHandler('DELETE', this.props.course);
+  }
+  
+  editCourse = (event) => {
+    event.preventDefault();
+    this.props.courseHandler('EDIT', this.props.course);
+  }
+
+  render = () => {
     const { title, points_gained, points_total } = this.props.course;
     return (
       <tr>
@@ -23,14 +34,14 @@ class CourseProgress extends React.Component {
           <button
             className="b--black-10 ba bg-green pointer pv1 white"
             type="submit"
-            // onClick={this.showCourseDialog}
+            onClick={this.editCourse}
           >
             Edit
           </button>
           <button
             className="b--black-10 ba bg-red ml3 pointer pv1 white"
             type="submit"
-            // onClick={this.showCourseDialog}
+            onClick={this.deleteCourse}
           >
             Delete
           </button>

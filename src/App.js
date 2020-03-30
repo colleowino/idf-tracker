@@ -27,9 +27,14 @@ class App extends React.Component {
   }
 
   resetToAddCourses = () => {
-    this.setState({ currentCourse: {}});
+    this.setState({ currentCourse: {} });
     this.showCourseDialog();
-  }
+  };
+
+  addCourses = () => {
+    this.setState({ action: formActions.CREATE, currentCourse: {} });
+    this.showCourseDialog();
+  };
 
   showCourseDialog() {
     const overlay = document.getElementById("overlay");
@@ -63,7 +68,7 @@ class App extends React.Component {
             <button
               className="b--black-10 ba bg-blue fr pointer pv1 white"
               type="submit"
-              onClick={this.resetToAddCourses}
+              onClick={this.addCourses}
             >
               + Course
             </button>

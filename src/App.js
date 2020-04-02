@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       data: [],
+      sortAsc: false,
       refreshKey: Math.random(),
       action: formActions.CREATE,
       currentCourse: {}
@@ -19,12 +20,41 @@ class App extends React.Component {
   refreshCourseList = () => {
     fetch(COURSE_URL)
       .then(response => response.json())
-      .then(data => this.setState({ data }));
+      .then(data => {
+        const updateProgressPoints = data.map(x =>
+          Object.assign(x, {
+            points_progress: x.points_gained / x.points_total
+          })
+        );
+        this.setState({ data: updateProgressPoints });
+      });
   };
 
   componentDidMount() {
     this.refreshCourseList();
   }
+
+  sortCourses = column => {
+    const tempCourses = [...this.state.data];
+    tempCourses.sort((a, b) => parseInt(a[column]) - parseInt(b[column]));
+    if (!this.state.sortAsc) {
+      tempCourses.reverse();
+    } 
+    this.setState({ data: tempCourses, sortAsc: !this.state.sortAsc });
+  };
+
+  sortCoursesByProgress = () => {
+    const tempCourses = [...this.state.data];
+    tempCourses.sort((a, b) => {
+      const progressA = a.points_gained / a.points_total;
+      const progressB = b.points_gained / b.points_total;
+      return progressA - progressB;
+    });
+    if (!this.state.sortAsc) {
+      tempCourses.reverse();
+    }
+    this.setState({ data: tempCourses, sortAsc: !this.state.sortAsc });
+  };
 
   resetToAddCourses = () => {
     this.setState({ currentCourse: {} });
@@ -74,7 +104,6 @@ class App extends React.Component {
             </button>
           </h1>
 
-          {/* <h1>currentTitle: {title}, points: {points_gained}</h1>   */}
           <table className="blueTable">
             <thead>
               <tr>
@@ -86,9 +115,24 @@ class App extends React.Component {
               <tr>
                 <th className="nums">#</th>
                 <th className="course-title">course</th>
-                <th>Progress</th>
-                <th className="course-points">Gained</th>
-                <th className="course-points">Total</th>
+                <th
+                  onClick={this.sortCoursesByProgress}
+                  className="pointer"
+                >
+                  Progress
+                </th>
+                <th
+                  onClick={() => this.sortCourses("points_gained")}
+                  className="course-points pointer"
+                >
+                  Gained
+                </th>
+                <th
+                  onClick={() => this.sortCourses("points_total")}
+                  className="course-points pointer"
+                >
+                  Total
+                </th>
                 <th>Actions</th>
               </tr>
             </thead>

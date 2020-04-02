@@ -23,10 +23,10 @@ class CourseProgress extends React.Component {
         </td>
         <td>
           <progress
-            className="white"
+            className="white mr2"
             max={points_total}
             value={points_gained}
-          ></progress>
+          ></progress> {parseInt(points_gained/points_total *100)} %
         </td>
         <td>{points_gained}</td>
         <td>{points_total}</td>

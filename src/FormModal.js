@@ -14,7 +14,6 @@ class FormModal extends React.Component {
     axios
       .post(COURSE_URL, data)
       .then(resp => {
-        console.log(resp);
         this.props.refresh(resp.data);
         this.hideCourseDialog();
       })
@@ -57,7 +56,7 @@ class FormModal extends React.Component {
     }
 
     if (formAction === formActions.EDIT) {
-      this.updateCourse();
+      this.updateCourse(data);
     }
 
     if (formAction === formActions.DELETE) {

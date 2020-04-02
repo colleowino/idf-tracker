@@ -78,9 +78,17 @@ class App extends React.Component {
           <table className="blueTable">
             <thead>
               <tr>
+                <th className="nums"></th>
+                <th className="course-title"></th>
+                <th colSpan="3">Points</th>
+                <th></th>
+              </tr>
+              <tr>
                 <th className="nums">#</th>
-                <th className="til">course</th>
+                <th className="course-title">course</th>
                 <th>Progress</th>
+                <th className="course-points">Gained</th>
+                <th className="course-points">Total</th>
                 <th>Actions</th>
               </tr>
             </thead>

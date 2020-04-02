@@ -27,10 +27,9 @@ class CourseProgress extends React.Component {
             max={points_total}
             value={points_gained}
           ></progress>
-          <span className="ml3">
-            {points_gained}/{points_total}
-          </span>
         </td>
+        <td>{points_gained}</td>
+        <td>{points_total}</td>
         <td>
           <button
             className="b--black-10 ba bg-green pointer pv1 white"

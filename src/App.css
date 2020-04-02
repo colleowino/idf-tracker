@@ -66,8 +66,12 @@ table.blueTable thead th {
   color: #a09fa2;
 }
 
-table.blueTable thead th.til {
-  width: 60%;
+table.blueTable thead th.course-title {
+  width: 40%;
+}
+
+table.blueTable thead th.course-points {
+  width: 40%;
 }
 
 table.blueTable thead th.nums {
